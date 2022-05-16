@@ -13,6 +13,7 @@ const WHITE_LISTED_KEYS = [
   "types",
   "type",
   "publishConfig",
+  "dependencies",
   "files",
   "author",
   "description",
