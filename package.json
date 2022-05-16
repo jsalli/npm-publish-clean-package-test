@@ -1,0 +1,56 @@
+{
+	"name": "npm-publish-clean-package-test",
+	"author": "Juha Sälli <juha@juhasalli.com> (https://juhasalli.com)",
+	"description": "Testing publishing package to NPM repository which has been cleaned from unnecessary files and package.json fields", 
+	"version": "1.0.0",
+	"main": "src/index.ts",
+	"types": "src/index.ts",
+	"publishConfig": {
+		"main": "dist/index.js",
+		"types": "dist/index.d.ts",
+		"directory": "packagePublishDir"
+	},
+	"keywords": ["Automation", "Testing"],
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/jsalli/npm-publish-clean-package-test/issues"
+	},
+  "homepage": "https://github.com/jsalli/npm-publish-clean-package-test",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jsalli/npm-publish-clean-package-test.git"
+	},
+	"type": "commonjs",
+	"files": ["dist/**/*.js", "dist/**/*.ts"],
+	"scripts": {
+		"clean": "rimraf ./dist/* tsconfig.tsbuildinfo package.tgz *.log .swc/*",
+		"compile": "swc src -d dist",
+		"build": "rushx compile && rushx build-types",
+		"build-types": "tsc -p tsconfig.build.types.json",
+		"test": "echo 'no test'",
+		"publish:deletePackagePublishDir": "rm -rf ./packagePublishDir",
+		"publish:copyFilesToPublishDir": "mkdir ./packagePublishDir && cp -r package.json dist ./packagePublishDir/",
+		"publish:cleanPackageJson": "node clean-package-json.js ./packagePublishDir/",
+		"publish:preparePackageDir": "pnpm publish:deletePackagePublishDir && pnpm publish:copyFilesToPublishDir && pnpm publish:cleanPackageJson",
+		"publish:makeTarPackage": "pnpm publish:preparePackageDir && pnpm pack --pack-destination ../",
+		"publish:publishToNpmRepositoryTest": "pnpm publish:preparePackageDir && pnpm publish --access public --publish-branch production --report-summary --dry-run",
+		"publish:publishToNpmRepository": "pnpm publish:preparePackageDir && pnpm publish --access public --publish-branch production --report-summary"
+	},
+	"devDependencies": {
+		"clean-publish": "^4.0.0",
+		"@types/node": "^17.0.12",
+		"rimraf": "^3.0.2",
+		"typescript": "^4.5.5",
+		"@swc/cli": "^0.1.55",
+		"@swc/core": "^1.2.133",
+		"eslint": "^8.7.0",
+		"eslint-plugin-import": "^2.25.4",
+		"prettier": "^2.5.1",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-anti-trojan-source": "^1.1.0",
+		"eslint-import-resolver-typescript": "^2.5.0",
+		"@typescript-eslint/eslint-plugin": "^5.10.1",
+		"@typescript-eslint/parser": "^5.10.1"
+	}
+}
