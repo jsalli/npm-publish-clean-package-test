@@ -30,7 +30,7 @@
 		"test": "echo 'no test'",
 		"publish:deletePackagePublishDir": "rm -rf ./packagePublishDir",
 		"publish:copyFilesToPublishDir": "mkdir ./packagePublishDir && cp -r package.json dist ./packagePublishDir/",
-		"publish:cleanPackageJson": "node clean-package-json.js ./packagePublishDir/",
+		"publish:cleanPackageJson": "node clean-package-json.cjs ./packagePublishDir/",
 		"publish:preparePackageDir": "pnpm publish:deletePackagePublishDir && pnpm publish:copyFilesToPublishDir && pnpm publish:cleanPackageJson",
 		"publish:makeTarPackage": "pnpm publish:preparePackageDir && pnpm pack --pack-destination ../",
 		"publish:publishToNpmRepositoryTest": "pnpm publish:preparePackageDir && pnpm publish --access public --publish-branch production --report-summary --dry-run",
