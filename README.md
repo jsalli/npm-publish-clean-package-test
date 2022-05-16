@@ -5,12 +5,10 @@ Add white listed fields of `package.json`-file to `clean-package-json.js` file's
 
 Copy to-be-published files with the `publish:copyFilesToPublishDir`-script in the `package.json`-file to the temp folder. Change the script as necessary for your needs.
 
-The repo is tested with PNPM package manager. The PNPM will use the `files`-field of `package.json` and exlude further files not matching with the patterns there.
+The repo is tested with PNPM package manager. The package manager will use the `files`-field of `package.json` when publishing and exlude further files not matching with the patterns there.
 
-Inspired from below NPM packages.
+Inspired from below NPM package.
 
 [clean-publish](https://www.npmjs.com/package/clean-publish)
-
-[clean-package](https://www.npmjs.com/package/clean-package)
 
 `clean-package-json.js` is copied from `clean-publish` [code.js](https://github.com/shashkovdanil/clean-publish/blob/master/core.js)
