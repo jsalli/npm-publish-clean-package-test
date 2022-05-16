@@ -20,7 +20,7 @@
 		"type": "git",
 		"url": "https://github.com/jsalli/npm-publish-clean-package-test.git"
 	},
-	"type": "commonjs",
+	"type": "module",
 	"files": ["dist/**/*.js", "dist/**/*.ts"],
 	"scripts": {
 		"clean": "rimraf ./dist/* tsconfig.tsbuildinfo package.tgz *.log .swc/*",
